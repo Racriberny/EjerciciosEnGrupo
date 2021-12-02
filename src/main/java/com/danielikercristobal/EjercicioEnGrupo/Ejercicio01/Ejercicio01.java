@@ -6,10 +6,16 @@ public class Ejercicio01 {
     public void execute(){
         int opcion=0;
         do {
-            opcion = menudPrincipal();
+            opcion = menuPrincipal();
             switch (opcion){
                 case 1:
-
+                    juego(porrasPlayer,porrasCPU);
+                    if(comprobarPorras(porrasPlayer, porrasCPU)) {
+                        System.out.println("\nPlayer gana la partida!!! por " + porrasPlayer + " porras a " + porrasCPU +"\n");
+                    } else {
+                        System.out.println("\nCPU gana la partida!!! por " + porrasCPU + " porras a "+ porrasPlayer +"\n");
+                    }
+                    break;
             }
 
         }while (opcion !=0);
@@ -27,21 +33,8 @@ public class Ejercicio01 {
         int porrasCPU = 0;
         int opcion;
         char plantarse;
-
-
-
-
-
-
         do {
-            System.out.println("***************************");
-            System.out.println("*** JUEGO DE DADOS ONCE ***");
-            System.out.println("***************************");
-            System.out.println("1. Nueva partida ...");
-            System.out.println("0. Salir");
-            System.out.print("\nElige una opción: ");
-            opcion = Lib.leerInt();
-            if(opcion == 1) {
+            if(menuPrincipal() == 1) {
                 porrasCPU = 0;
                 porrasPlayer = 0;
                 puntosCPU = 0;
@@ -133,7 +126,6 @@ public class Ejercicio01 {
                         Lib.leerLinea();
                     }
                 } while(porrasPlayer < 5 && porrasCPU < 5);
-
             }
         } while(opcion != 0);
         System.out.println("Hasta pronto!!");
