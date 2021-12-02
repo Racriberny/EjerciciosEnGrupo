@@ -3,37 +3,30 @@ package com.danielikercristobal.EjercicioEnGrupo.Ejercicio01;
 import com.danielikercristobal.EjercicioEnGrupo.Lib.Lib;
 
 public class Ejercicio01 {
-    public void execute(){
-        int opcion=0;
+    public void execute() throws InterruptedException {
+        int opcion = 0;
         do {
             opcion = menuPrincipal();
-            switch (opcion){
+            switch (opcion) {
                 case 1:
-                    juego(porrasPlayer,porrasCPU);
-                    if(comprobarPorras(porrasPlayer, porrasCPU)) {
-                        System.out.println("\nPlayer gana la partida!!! por " + porrasPlayer + " porras a " + porrasCPU +"\n");
-                    } else {
-                        System.out.println("\nCPU gana la partida!!! por " + porrasCPU + " porras a "+ porrasPlayer +"\n");
-                    }
+                    juego();
                     break;
             }
-
-        }while (opcion !=0);
-
-
+        } while (opcion != 0);
+        System.out.println("Hasta pronto!!");
     }
-    public static void main(String[] args) throws InterruptedException {
+
+    public static void juego() throws InterruptedException {
         final int DELAY = 500;
         final int VALOR_MIN = 1;
         final int VALOR_MAX = 6;
         boolean plantado = false;
+        int porrasCPU = 0;
+        int porrasPlayer = 0;
         int tiradaPlayer;
         int puntosPlayer = 0;
-        int porrasPlayer = 0;
         int tiradaCPU;
         int puntosCPU = 0;
-        int porrasCPU = 0;
-        int opcion;
         char plantarse;
         do {
             System.out.println("Jugador lanza el dado al aire ...");
@@ -86,6 +79,7 @@ public class Ejercicio01 {
                         porrasCPU++;
                         porrasPlayer++;
                     }
+                    System.out.println("Hola");
                     System.out.println("\n**********************");
                     System.out.println("* " + porrasPlayer + " PLAYER  -  CPU " + porrasCPU + " *");
                     System.out.println("**********************");
@@ -142,7 +136,6 @@ public class Ejercicio01 {
         boolean ganador = false;
         //En caso de que gane la CPU, el método devolverá FALSE, en el caso de que gane el jugador, devolverá TRUE
         if(porrasCPU >= 5) {
-            System.out.println("\nCPU gana la partida!!! por " + porrasCPU + " porras a "+ porrasPlayer +"\n");
             ganador = false;
         } else if(porrasPlayer >= 5) {
             ganador = true;
