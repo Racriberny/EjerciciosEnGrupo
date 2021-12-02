@@ -29,11 +29,15 @@ public class Lib {
         return r.nextDouble() * (MAX - MIN + 1) + MIN;
     }
 
-    public void espera(int x){
+    public static void espera(int x){
         try {
             Thread.sleep(x);
         }catch (InterruptedException ie){
 
         }
+    }
+    public static void intro(){
+        System.out.print("\nPulsa intro para continuar...");
+        Lib.leerLinea();
     }
 }

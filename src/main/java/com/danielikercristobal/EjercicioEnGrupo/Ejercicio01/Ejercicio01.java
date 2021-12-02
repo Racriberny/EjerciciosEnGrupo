@@ -24,6 +24,8 @@ public class Ejercicio01 {
     }
     public static void main(String[] args) throws InterruptedException {
         final int DELAY = 500;
+        final int VALOR_MIN = 1;
+        final int VALOR_MAX = 6;
         boolean plantado = false;
         int tiradaPlayer;
         int puntosPlayer = 0;
@@ -35,8 +37,8 @@ public class Ejercicio01 {
         char plantarse;
         do {
             System.out.println("Jugador lanza el dado al aire ...");
-            Thread.sleep(DELAY);
-            tiradaPlayer = Lib.numeroAleatorio(1, 6);
+            Lib.espera(DELAY);
+            tiradaPlayer = Lib.numeroAleatorio(VALOR_MIN, VALOR_MAX);
             System.out.println("\n*****");
             System.out.println("* " + tiradaPlayer + " *");
             System.out.println("*****");
@@ -51,8 +53,8 @@ public class Ejercicio01 {
                     //Ahora la CPU intenta igualar o mejorar el resultado del jugador
                     while (puntosCPU < puntosPlayer) {
                         System.out.println("CPU lanza el dado al aire ...");
-                        Thread.sleep(DELAY);
-                        tiradaCPU = Lib.numeroAleatorio(1, 6);
+                        Lib.espera(DELAY);
+                        tiradaCPU = Lib.numeroAleatorio(VALOR_MIN, VALOR_MAX);
                         System.out.println("\n?????");
                         System.out.println("? " + tiradaCPU + " ?");
                         System.out.println("?????\n");
@@ -87,8 +89,7 @@ public class Ejercicio01 {
                     System.out.println("\n**********************");
                     System.out.println("* " + porrasPlayer + " PLAYER  -  CPU " + porrasCPU + " *");
                     System.out.println("**********************");
-                    System.out.print("\nPulsa intro para continuar...");
-                    Lib.leerLinea();
+                    Lib.intro();
                 }
             } else if (puntosPlayer == 11) {
                 //Al obtener 11 el jugador suma automáticamente 2 porras
@@ -102,8 +103,7 @@ public class Ejercicio01 {
                 System.out.println("\n**********************");
                 System.out.println("* " + porrasPlayer + " PLAYER  -  CPU " + porrasCPU + " *");
                 System.out.println("**********************");
-                System.out.print("\nPulsa intro para continuar...");
-                Lib.leerLinea();
+                Lib.intro();
             } else {
                 //El jugador se ha pasado
                 System.out.println("Ohh!! Te has pasado");
@@ -114,8 +114,7 @@ public class Ejercicio01 {
                 System.out.println("\n**********************");
                 System.out.println("* " + porrasPlayer + " PLAYER  -  CPU " + porrasCPU + " *");
                 System.out.println("**********************");
-                System.out.print("\nPulsa intro para continuar...");
-                Lib.leerLinea();
+                Lib.intro();
             }
 
         } while (porrasPlayer < 5 && porrasCPU < 5);
@@ -141,7 +140,6 @@ public class Ejercicio01 {
 
     public static boolean comprobarPorras(int porrasPlayer, int porrasCPU){
         boolean ganador = false;
-
         //En caso de que gane la CPU, el método devolverá FALSE, en el caso de que gane el jugador, devolverá TRUE
         if(porrasCPU >= 5) {
             System.out.println("\nCPU gana la partida!!! por " + porrasCPU + " porras a "+ porrasPlayer +"\n");
