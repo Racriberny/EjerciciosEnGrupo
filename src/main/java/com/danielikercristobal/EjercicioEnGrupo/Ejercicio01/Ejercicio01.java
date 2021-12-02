@@ -34,103 +34,100 @@ public class Ejercicio01 {
         int opcion;
         char plantarse;
         do {
-            if(menuPrincipal() == 1) {
-                porrasCPU = 0;
-                porrasPlayer = 0;
+            System.out.println("Jugador lanza el dado al aire ...");
+            Thread.sleep(DELAY);
+            tiradaPlayer = Lib.numeroAleatorio(1, 6);
+            System.out.println("\n*****");
+            System.out.println("* " + tiradaPlayer + " *");
+            System.out.println("*****");
+            puntosPlayer += tiradaPlayer;
+            System.out.println("\nTu puntuación actual es " + puntosPlayer);
+            if (puntosPlayer < 11) {
+                System.out.print("¿Deseas plantarte con " + puntosPlayer + " puntos? (s/n): ");
+                plantarse = Lib.leerLinea().charAt(0);
+                plantado = plantarse == 's' || plantarse == 'S';
+                if (plantado) {
+                    plantado = false;
+                    //Ahora la CPU intenta igualar o mejorar el resultado del jugador
+                    while (puntosCPU < puntosPlayer) {
+                        System.out.println("CPU lanza el dado al aire ...");
+                        Thread.sleep(DELAY);
+                        tiradaCPU = Lib.numeroAleatorio(1, 6);
+                        System.out.println("\n?????");
+                        System.out.println("? " + tiradaCPU + " ?");
+                        System.out.println("?????\n");
+                        puntosCPU += tiradaCPU;
+                        System.out.println("La puntuación actual de la CPU es " + puntosCPU);
+                    }
+                    if (puntosCPU > 11) {
+                        System.out.println("CPU se ha pasado. Porra para Player!!");
+                        porrasPlayer++;
+                        puntosCPU = 0;
+                        puntosPlayer = 0;
+                    } else if (puntosCPU > puntosPlayer) { // Gana CPU
+                        if (puntosCPU == 11) {
+                            System.out.println("\n$$$$$$$$$$$$$$$$");
+                            System.out.println("$$$$ ¡ONCE! $$$$");
+                            System.out.println("$$$$$$$$$$$$$$$$");
+                            System.out.println("\nDoble porra para CPU\n");
+                            porrasCPU += 2;
+                        } else {
+                            System.out.println("CPU ha mejorado tu puntuación. Porra para CPU!!");
+                            porrasCPU++;
+                        }
+                        puntosCPU = 0;
+                        puntosPlayer = 0;
+                    } else { // Empate
+                        System.out.println("Empate!! Porra para los dos");
+                        puntosCPU = 0;
+                        puntosPlayer = 0;
+                        porrasCPU++;
+                        porrasPlayer++;
+                    }
+                    System.out.println("\n**********************");
+                    System.out.println("* " + porrasPlayer + " PLAYER  -  CPU " + porrasCPU + " *");
+                    System.out.println("**********************");
+                    System.out.print("\nPulsa intro para continuar...");
+                    Lib.leerLinea();
+                }
+            } else if (puntosPlayer == 11) {
+                //Al obtener 11 el jugador suma automáticamente 2 porras
+                porrasPlayer += 2;
                 puntosCPU = 0;
                 puntosPlayer = 0;
-                do {
-                    System.out.println("Jugador lanza el dado al aire ...");
-                    Thread.sleep(DELAY);
-                    tiradaPlayer = Lib.numeroAleatorio(1,6);
-                    System.out.println("\n*****");
-                    System.out.println("* " + tiradaPlayer + " *");
-                    System.out.println("*****");
-                    puntosPlayer += tiradaPlayer;
-                    System.out.println("\nTu puntuación actual es " + puntosPlayer);
-                    if(puntosPlayer < 11) {
-                        System.out.print("¿Deseas plantarte con " + puntosPlayer +" puntos? (s/n): ");
-                        plantarse = Lib.leerLinea().charAt(0);
-                        plantado =  plantarse == 's' || plantarse == 'S';
-                        if(plantado) {
-                            plantado = false;
-                            //Ahora la CPU intenta igualar o mejorar el resultado del jugador
-                            while(puntosCPU < puntosPlayer) {
-                                System.out.println("CPU lanza el dado al aire ...");
-                                Thread.sleep(DELAY);
-                                tiradaCPU = Lib.numeroAleatorio(1,6);
-                                System.out.println("\n?????");
-                                System.out.println("? " + tiradaCPU + " ?");
-                                System.out.println("?????\n");
-                                puntosCPU += tiradaCPU;
-                                System.out.println("La puntuación actual de la CPU es " +puntosCPU);
-                            }
-                            if(puntosCPU > 11) {
-                                System.out.println("CPU se ha pasado. Porra para Player!!");
-                                porrasPlayer++;
-                                puntosCPU = 0;
-                                puntosPlayer = 0;
-                            } else if(puntosCPU > puntosPlayer) { // Gana CPU
-                                if(puntosCPU == 11) {
-                                    System.out.println("\n$$$$$$$$$$$$$$$$");
-                                    System.out.println("$$$$ ¡ONCE! $$$$");
-                                    System.out.println("$$$$$$$$$$$$$$$$");
-                                    System.out.println("\nDoble porra para CPU\n");
-                                    porrasCPU += 2;
-                                } else {
-                                    System.out.println("CPU ha mejorado tu puntuación. Porra para CPU!!");
-                                    porrasCPU++;
-                                }
-                                puntosCPU = 0;
-                                puntosPlayer = 0;
-                            } else { // Empate
-                                System.out.println("Empate!! Porra para los dos");
-                                puntosCPU = 0;
-                                puntosPlayer = 0;
-                                porrasCPU++;
-                                porrasPlayer++;
-                            }
-
-                            System.out.println("\n**********************");
-                            System.out.println("* " + porrasPlayer + " PLAYER  -  CPU " +porrasCPU + " *");
-                            System.out.println("**********************");
-                            System.out.print("\nPulsa intro para continuar...");
-                            Lib.leerLinea();
-                        }
-                    } else if (puntosPlayer == 11) {
-                        //Al obtener 11 el jugador suma automáticamente 2 porras
-                        porrasPlayer += 2;
-                        puntosCPU = 0;
-                        puntosPlayer = 0;
-                        System.out.println("\n$$$$$$$$$$$$$$$$");
-                        System.out.println("$$$$ ¡ONCE! $$$$");
-                        System.out.println("$$$$$$$$$$$$$$$$");
-                        System.out.println("\n¡Bonificación! Doble porra");
-
-                        System.out.println("\n**********************");
-                        System.out.println("* " + porrasPlayer + " PLAYER  -  CPU " +porrasCPU + " *");
-                        System.out.println("**********************");
-                        System.out.print("\nPulsa intro para continuar...");
-                        Lib.leerLinea();
-                    } else {
-                        //El jugador se ha pasado
-                        System.out.println("Ohh!! Te has pasado");
-                        System.out.println("Porra para la CPU");
-                        porrasCPU += 1;
-                        puntosCPU = 0;
-                        puntosPlayer = 0;
-                        System.out.println("\n**********************");
-                        System.out.println("* " + porrasPlayer + " PLAYER  -  CPU " +porrasCPU + " *");
-                        System.out.println("**********************");
-                        System.out.print("\nPulsa intro para continuar...");
-                        Lib.leerLinea();
-                    }
-                } while(porrasPlayer < 5 && porrasCPU < 5);
+                System.out.println("\n$$$$$$$$$$$$$$$$");
+                System.out.println("$$$$ ¡ONCE! $$$$");
+                System.out.println("$$$$$$$$$$$$$$$$");
+                System.out.println("\n¡Bonificación! Doble porra");
+                System.out.println("\n**********************");
+                System.out.println("* " + porrasPlayer + " PLAYER  -  CPU " + porrasCPU + " *");
+                System.out.println("**********************");
+                System.out.print("\nPulsa intro para continuar...");
+                Lib.leerLinea();
+            } else {
+                //El jugador se ha pasado
+                System.out.println("Ohh!! Te has pasado");
+                System.out.println("Porra para la CPU");
+                porrasCPU += 1;
+                puntosCPU = 0;
+                puntosPlayer = 0;
+                System.out.println("\n**********************");
+                System.out.println("* " + porrasPlayer + " PLAYER  -  CPU " + porrasCPU + " *");
+                System.out.println("**********************");
+                System.out.print("\nPulsa intro para continuar...");
+                Lib.leerLinea();
             }
-        } while(opcion != 0);
-        System.out.println("Hasta pronto!!");
+
+        } while (porrasPlayer < 5 && porrasCPU < 5);
+
+        if (comprobarPorras(porrasPlayer, porrasCPU)) {
+            System.out.println("\nPlayer gana la partida!!! por " + porrasPlayer + " porras a " + porrasCPU + " de la CPU\n");
+        } else {
+            System.out.println("\nCPU gana la partida!!! por " + porrasCPU + " porras a " + porrasPlayer + " del player\n");
+        }
     }
-    public static int menudPrincipal(){
+
+    public static int menuPrincipal(){
         int opcion;
         System.out.println("***************************");
         System.out.println("*** JUEGO DE DADOS ONCE ***");
